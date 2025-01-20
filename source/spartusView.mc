@@ -26,6 +26,7 @@ class spartusView extends WatchUi.WatchFace {
     $.Rez.Drawables.C9]; 
 
     private var gap as Number = 20;
+    private var oneshift as Number = 0;
 
     function initialize() {
         WatchFace.initialize();
@@ -47,7 +48,7 @@ class spartusView extends WatchUi.WatchFace {
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-        dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
+        dc.setColor(Graphics.COLOR_BLUE, 0x550000);
 
         // Get time
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT) as Gregorian.Info;
@@ -65,16 +66,24 @@ class spartusView extends WatchUi.WatchFace {
         var d2 = Application.loadResource($.Rez.Drawables.Dot);
         dc.drawBitmap(195, (195+25), d2);
 
+        // update gap for 1
+
         // place time pngs - 64w x 100h; center of Venu3S is 195
         var htPng = Application.loadResource(nombreA[hourTens]);
-        dc.drawBitmap(195-gap-64-gap-46, (195-50), htPng);
+        oneshift = (hourTens == 1) ? 32 : 0;
+        dc.drawBitmap(195-gap-64-gap-46+oneshift, (195-50), htPng);
+
         var hoPng = Application.loadResource(nombreA[hourOnes]);
-        dc.drawBitmap(195-gap-64, (195-50), hoPng);
+        oneshift = (hourOnes == 1) ? 32 : 0;
+        dc.drawBitmap(195-gap-64+oneshift, (195-50), hoPng);
 
         var mtPng = Application.loadResource(nombreA[minuteTens]);
-        dc.drawBitmap(195+gap, (195-50), mtPng);
+        oneshift = (minuteTens == 1) ? 32 : 0;
+        dc.drawBitmap(195+gap+oneshift, (195-50), mtPng);
+
         var moPng = Application.loadResource(nombreA[minuteOnes]);
-        dc.drawBitmap(195+gap+64+gap, (195-50), moPng);
+        oneshift = (minuteOnes == 1) ? 32 : 0;
+        dc.drawBitmap(195+gap+64+gap+oneshift, (195-50), moPng);
 
     }
 
