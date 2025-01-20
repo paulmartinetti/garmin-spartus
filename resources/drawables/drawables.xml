@@ -1,0 +1,13 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="C0" filename="C0.png" />
+    <bitmap id="C1" filename="C1.png" />
+    <bitmap id="C2" filename="C2.png" />
+    <bitmap id="C3" filename="C3.png" />
+    <bitmap id="C4" filename="C4.png" />
+    <bitmap id="C5" filename="C5.png" />
+    <bitmap id="C6" filename="C6.png" />
+    <bitmap id="C7" filename="C7.png" />
+    <bitmap id="C8" filename="C8.png" />
+    <bitmap id="C9" filename="C9.png" />
+</drawables>
