@@ -1,10 +1,31 @@
+//
+// 
+// Whatever
+// 
+//
+
 import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
+import Toybox.Time;
 
 class spartusView extends WatchUi.WatchFace {
+
+    private var nombreA as Array = [
+    $.Rez.Drawables.C0,
+    $.Rez.Drawables.C1,
+    $.Rez.Drawables.C2,
+    $.Rez.Drawables.C3,
+    $.Rez.Drawables.C4,
+    $.Rez.Drawables.C5,
+    $.Rez.Drawables.C6,
+    $.Rez.Drawables.C7,
+    $.Rez.Drawables.C8,
+    $.Rez.Drawables.C9]; 
+
+    private var gap as Number = 20;
 
     function initialize() {
         WatchFace.initialize();
@@ -12,7 +33,7 @@ class spartusView extends WatchUi.WatchFace {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.WatchFace(dc));
+        //setLayout(Rez.Layouts.WatchFace(dc));
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -23,29 +44,38 @@ class spartusView extends WatchUi.WatchFace {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
-        // Get the current time and format it correctly
-        var timeFormat = "$1$:$2$";
-        var clockTime = System.getClockTime();
-        var hours = clockTime.hour;
-        if (!System.getDeviceSettings().is24Hour) {
-            if (hours > 12) {
-                hours = hours - 12;
-            }
-        } else {
-            if (Application.Properties.getValue("UseMilitaryFormat")) {
-                timeFormat = "$1$$2$";
-                hours = hours.format("%02d");
-            }
-        }
-        var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
-
-        // Update the view
-        var view = View.findDrawableById("TimeLabel") as Text;
-        view.setColor(Application.Properties.getValue("ForegroundColor") as Number);
-        view.setText(timeString);
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
+        dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
+
+        // Get time
+        var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT) as Gregorian.Info;
+        var hourTens = today.hour / 10 % 10;
+        var hourOnes = today.hour % 10;
+        var minuteTens = today.min / 10 % 10;
+        var minuteOnes = today.min % 10;
+
+        // clear screen to draw on
+        dc.clear();
+
+        // place dots
+        var d1 = Application.loadResource($.Rez.Drawables.Dot);
+        dc.drawBitmap(195, (195-25), d1);
+        var d2 = Application.loadResource($.Rez.Drawables.Dot);
+        dc.drawBitmap(195, (195+25), d2);
+
+        // place time pngs - 64w x 100h; center of Venu3S is 195
+        var htPng = Application.loadResource(nombreA[hourTens]);
+        dc.drawBitmap(195-gap-64-gap-46, (195-50), htPng);
+        var hoPng = Application.loadResource(nombreA[hourOnes]);
+        dc.drawBitmap(195-gap-64, (195-50), hoPng);
+
+        var mtPng = Application.loadResource(nombreA[minuteTens]);
+        dc.drawBitmap(195+gap, (195-50), mtPng);
+        var moPng = Application.loadResource(nombreA[minuteOnes]);
+        dc.drawBitmap(195+gap+64+gap, (195-50), moPng);
+
     }
 
     // Called when this View is removed from the screen. Save the

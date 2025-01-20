@@ -10,4 +10,5 @@
     <bitmap id="C7" filename="C7.png" />
     <bitmap id="C8" filename="C8.png" />
     <bitmap id="C9" filename="C9.png" />
+    <bitmap id="Dot" filename="dot.png" />
 </drawables>
