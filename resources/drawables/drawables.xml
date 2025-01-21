@@ -11,4 +11,14 @@
     <bitmap id="C8" filename="C8.png" />
     <bitmap id="C9" filename="C9.png" />
     <bitmap id="Dot" filename="dot.png" />
+    <bitmap id="D0" filename="D0.png" />
+    <bitmap id="D1" filename="D1.png" />
+    <bitmap id="D2" filename="D2.png" />
+    <bitmap id="D3" filename="D3.png" />
+    <bitmap id="D4" filename="D4.png" />
+    <bitmap id="D5" filename="D5.png" />
+    <bitmap id="D6" filename="D6.png" />
+    <bitmap id="D7" filename="D7.png" />
+    <bitmap id="D8" filename="D8.png" />
+    <bitmap id="D9" filename="D9.png" />
 </drawables>

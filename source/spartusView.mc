@@ -25,6 +25,18 @@ class spartusView extends WatchUi.WatchFace {
     $.Rez.Drawables.C8,
     $.Rez.Drawables.C9]; 
 
+    private var jourA as Array = [
+    $.Rez.Drawables.D0,
+    $.Rez.Drawables.D1,
+    $.Rez.Drawables.D2,
+    $.Rez.Drawables.D3,
+    $.Rez.Drawables.D4,
+    $.Rez.Drawables.D5,
+    $.Rez.Drawables.D6,
+    $.Rez.Drawables.D7,
+    $.Rez.Drawables.D8,
+    $.Rez.Drawables.D9]; 
+
     function initialize() {
         WatchFace.initialize();
     }
@@ -45,7 +57,7 @@ class spartusView extends WatchUi.WatchFace {
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-        dc.setColor(Graphics.COLOR_BLUE, 0x330000);
+        dc.setColor(Graphics.COLOR_BLUE, 0x3f0000);
 
         // Get time
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT) as Gregorian.Info;
@@ -64,7 +76,7 @@ class spartusView extends WatchUi.WatchFace {
         dc.drawBitmap(190, (195+20), d2);
 
         // update gap for 1
-        var gap = 20;
+        var gap = 16;
 
         // place time pngs - 64w x 100h; center of Venu3S is 195
         var htPng = Application.loadResource(nombreA[hourTens]);
@@ -78,6 +90,17 @@ class spartusView extends WatchUi.WatchFace {
 
         var moPng = Application.loadResource(nombreA[minuteOnes]);
         dc.drawBitmap(195+gap+64+gap, (195-moPng.getHeight()/2), moPng);
+
+        // get day of the month
+        var dayTens = today.day / 10 % 10;
+        var dayOnes = today.day % 10;
+
+        // display day of the month below time
+        var dtPng = Application.loadResource(jourA[dayTens]);
+        dc.drawBitmap(195-gap/2-dtPng.getWidth(), 290, dtPng);
+
+        var doPng = Application.loadResource(jourA[dayOnes]);
+        dc.drawBitmap(195+gap/2, 290, doPng);
 
     }
 
