@@ -25,9 +25,6 @@ class spartusView extends WatchUi.WatchFace {
     $.Rez.Drawables.C8,
     $.Rez.Drawables.C9]; 
 
-    private var gap as Number = 20;
-    private var oneshift as Number = 0;
-
     function initialize() {
         WatchFace.initialize();
     }
@@ -48,7 +45,7 @@ class spartusView extends WatchUi.WatchFace {
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-        dc.setColor(Graphics.COLOR_BLUE, 0x550000);
+        dc.setColor(Graphics.COLOR_BLUE, 0x330000);
 
         // Get time
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT) as Gregorian.Info;
@@ -60,30 +57,27 @@ class spartusView extends WatchUi.WatchFace {
         // clear screen to draw on
         dc.clear();
 
-        // place dots
+        // place dots - dot height is 10px
         var d1 = Application.loadResource($.Rez.Drawables.Dot);
-        dc.drawBitmap(195, (195-25), d1);
+        dc.drawBitmap(195, (195-30), d1);
         var d2 = Application.loadResource($.Rez.Drawables.Dot);
-        dc.drawBitmap(195, (195+25), d2);
+        dc.drawBitmap(190, (195+20), d2);
 
         // update gap for 1
+        var gap = 20;
 
         // place time pngs - 64w x 100h; center of Venu3S is 195
         var htPng = Application.loadResource(nombreA[hourTens]);
-        oneshift = (hourTens == 1) ? 32 : 0;
-        dc.drawBitmap(195-gap-64-gap-46+oneshift, (195-50), htPng);
+        dc.drawBitmap(195-gap-64-gap-64, (195-htPng.getHeight()/2), htPng);
 
         var hoPng = Application.loadResource(nombreA[hourOnes]);
-        oneshift = (hourOnes == 1) ? 32 : 0;
-        dc.drawBitmap(195-gap-64+oneshift, (195-50), hoPng);
+        dc.drawBitmap(195-gap-64, (195-hoPng.getHeight()/2), hoPng);
 
         var mtPng = Application.loadResource(nombreA[minuteTens]);
-        oneshift = (minuteTens == 1) ? 32 : 0;
-        dc.drawBitmap(195+gap+oneshift, (195-50), mtPng);
+        dc.drawBitmap(195+gap, (195-mtPng.getHeight()/2), mtPng);
 
         var moPng = Application.loadResource(nombreA[minuteOnes]);
-        oneshift = (minuteOnes == 1) ? 32 : 0;
-        dc.drawBitmap(195+gap+64+gap+oneshift, (195-50), moPng);
+        dc.drawBitmap(195+gap+64+gap, (195-moPng.getHeight()/2), moPng);
 
     }
 
