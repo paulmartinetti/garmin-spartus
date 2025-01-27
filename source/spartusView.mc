@@ -7,7 +7,6 @@
 import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
-import Toybox.System;
 import Toybox.WatchUi;
 import Toybox.Time;
 
@@ -55,9 +54,11 @@ class spartusView extends WatchUi.WatchFace {
     // Update the view
     function onUpdate(dc as Dc) as Void {
 
-        // Call the parent onUpdate function to redraw the layout
-        View.onUpdate(dc);
-        dc.setColor(Graphics.COLOR_BLUE, 0x3f0000);
+        // Call the parent onUpdate function to redraw the layout -- we're not using layout
+        //View.onUpdate(dc);
+
+        // we're only drawing pngs not new colors so forefront can be transparent
+        dc.setColor(Graphics.COLOR_TRANSPARENT, 0x3f0000);
 
         // Get time
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT) as Gregorian.Info;
