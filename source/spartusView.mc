@@ -12,6 +12,7 @@ import Toybox.Time;
 
 class spartusView extends WatchUi.WatchFace {
 
+    // large numbers, one png per 0-9
     private var nombreA as Array = [
     $.Rez.Drawables.C0,
     $.Rez.Drawables.C1,
@@ -24,6 +25,7 @@ class spartusView extends WatchUi.WatchFace {
     $.Rez.Drawables.C8,
     $.Rez.Drawables.C9]; 
 
+    // small numbers for the date, 0-9
     private var jourA as Array = [
     $.Rez.Drawables.D0,
     $.Rez.Drawables.D1,
@@ -40,7 +42,7 @@ class spartusView extends WatchUi.WatchFace {
         WatchFace.initialize();
     }
 
-    // Load your resources here
+    // Load your resources here - not using
     function onLayout(dc as Dc) as Void {
         //setLayout(Rez.Layouts.WatchFace(dc));
     }
